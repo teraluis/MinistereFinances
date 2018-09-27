@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Entreprises list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Siret</th>
+                <th>Nom</th>
+                <th>Denomination</th>
+                <th>Adresse</th>
+                <th>Creation</th>
+                <th>Directeur</th>
+                <th>Modification</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entreprise in entreprises %}
+            <tr>
+                <td><a href="{{ path('entreprises_show', { 'id': entreprise.siret }) }}">{{ entreprise.siret }}</a></td>
+                <td>{{ entreprise.nom }}</td>
+                <td>{{ entreprise.denomination }}</td>
+                <td>{{ entreprise.adresse }}</td>
+                <td>{% if entreprise.creation %}{{ entreprise.creation|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ entreprise.directeur }}</td>
+                <td>{% if entreprise.modification %}{{ entreprise.modification|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('entreprises_show', { 'id': entreprise.siret }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('entreprises_edit', { 'id': entreprise.siret }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('entreprises_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

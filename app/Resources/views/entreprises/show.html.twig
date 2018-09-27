@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Entreprises</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Siret</th>
+                <td>{{ entreprise.siret }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ entreprise.nom }}</td>
+            </tr>
+            <tr>
+                <th>Denomination</th>
+                <td>{{ entreprise.denomination }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ entreprise.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Creation</th>
+                <td>{% if entreprise.creation %}{{ entreprise.creation|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Directeur</th>
+                <td>{{ entreprise.directeur }}</td>
+            </tr>
+            <tr>
+                <th>Modification</th>
+                <td>{% if entreprise.modification %}{{ entreprise.modification|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('entreprises_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('entreprises_edit', { 'id': entreprise.siret }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

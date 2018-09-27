@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ca list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Annee</th>
+                <th>Modification</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ca in cas %}
+            <tr>
+                <td><a href="{{ path('CA_show', { 'id': ca.id }) }}">{{ ca.id }}</a></td>
+                <td>{% if ca.annee %}{{ ca.annee|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if ca.modification %}{{ ca.modification|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('CA_show', { 'id': ca.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('CA_edit', { 'id': ca.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('CA_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
